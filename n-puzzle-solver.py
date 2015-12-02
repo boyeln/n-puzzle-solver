@@ -81,7 +81,7 @@ def search(node, g, bound):
 	return node,min_f
 
 def solve(board, bound):
-	if bound > 80: return None, None # Unsolvable
+	if bound > 81: return None, None # Unsolvable
 	n,t = search(root, 0, bound)
 	if n.heuristic == 0: return n,t
 	return solve(board, t)
