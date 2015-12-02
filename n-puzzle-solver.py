@@ -4,7 +4,7 @@ from time import time
 
 DIMENSIONS = 3
 CUSTOM_BOARD = None # e.g. [1, 6, 3, 5, 8, 7, 2, 4]
-
+MAX_DEPTH = 81
 
 class Node(object):
 	global DIMENSIONS
@@ -49,7 +49,6 @@ class Node(object):
 		n = len(str(DIMENSIONS**2-1))
 		return "\n".join(["|" + "|".join([str(self.board[x,y]).replace("None", " ").ljust(n) for x in range(DIMENSIONS)]) + "|" for y in range(DIMENSIONS)])
 
-
 def create_board(board=None):
 	global DIMENSIONS
 	solvable = lambda b: sum([sum([1 for i in range(n+1, len(b)) if b[n] > b[i]]) for n in range(0, len(b)-1)]) % 2 == 0
@@ -81,7 +80,8 @@ def search(node, g, bound):
 	return node,min_f
 
 def solve(board, bound):
-	if bound > 81: return None, None # Unsolvable
+	global MAX_DEPTH
+	if bound > MAX_DEPTH: return None, None # Unsolvable
 	n,t = search(root, 0, bound)
 	if n.heuristic == 0: return n,t
 	return solve(board, t)
