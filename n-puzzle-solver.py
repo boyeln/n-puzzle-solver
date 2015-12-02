@@ -4,7 +4,7 @@ from time import time
 
 DIMENSIONS = 3
 CUSTOM_BOARD = None # e.g. [1, 6, 3, 5, 8, 7, 2, 4]
-MAX_DEPTH = 81
+MAX_DEPTH = 80
 
 class Node(object):
 	global DIMENSIONS
